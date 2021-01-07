@@ -37,6 +37,11 @@ public class PlantController {
 
     }
 
+    @GetMapping("/plants")
+    public List<Plant> getPlants() {
+        return plantRepository.findAll();
+    }
+
     @GetMapping("/plants/name/{name}")
     public Plant getPlantByName(@PathVariable String name) {
         return plantRepository.findPlantByName(name);
