@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Plant {
     @Id
     private String id;
+    private int plantNumber;
     private String name;
     private String description;
     // Tuincentra? !!!!
@@ -16,7 +17,8 @@ public class Plant {
     }
 
     // Change when center is needed !!!!
-    public Plant(String name, String description) {
+    public Plant(int plantNumber, String name, String description) {
+        this.plantNumber = plantNumber;
         this.name = name;
         this.description = description;
     }
@@ -28,6 +30,14 @@ public class Plant {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getPlantNumber() {
+        return plantNumber;
+    }
+
+    public void setPlantNumber(int plantNumber) {
+        this.plantNumber = plantNumber;
     }
 
     public String getName() {
