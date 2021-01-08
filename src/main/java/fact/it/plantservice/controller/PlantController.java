@@ -54,40 +54,74 @@ public class PlantController {
         return plantRepository.findPlantByDescriptionContaining(description);
     }
 
+    @GetMapping("/plants/{plantNumber}")
+    public Plant getPlantByPlantNumber(@PathVariable String plantNumber) {
+        return plantRepository.findPlantByPlantNumber(plantNumber);
+    }
 
-    //create
+
+    // Create
+    //    @PostMapping("/plants")
+    //    public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
+    //        try {
+    //            Plant _plant = plantRepository.save(plant);
+    //            return new ResponseEntity<>(_plant, HttpStatus.CREATED);
+    //        } catch (Exception e) {
+    //            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    //        }
+    //    }
+
     @PostMapping("/plants")
-    public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
-        try {
-            Plant _plant = plantRepository.save(plant);
-            return new ResponseEntity<>(_plant, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public Plant addReview(@RequestBody Plant plant) {
+        plantRepository.save(plant);
+        return plant;
     }
 
-    //update
-    @PutMapping("/plants/{plantNumber}")
-        public ResponseEntity<Plant> updatePlant(@PathVariable("plantNumber") int id, @RequestBody Plant plant) {
-        Plant _plant = plantRepository.findByPlantNumber(id);
+    // Update
+    //    @PutMapping("/plants/{plantNumber}")
+    //        public ResponseEntity<Plant> updatePlant(@PathVariable("plantNumber") int id, @RequestBody Plant plant) {
+    //        Plant _plant = plantRepository.findPlantByPlantNumber(id);
+    //
+    //        if (_plant!=null) {
+    //            _plant.setName(plant.getName());
+    //            _plant.setDescription(plant.getDescription());
+    //            return new ResponseEntity<>(plantRepository.save(_plant), HttpStatus.OK);
+    //        } else {
+    //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //        }
+    //    }
 
-        if (_plant!=null) {
-            _plant.setName(plant.getName());
-            _plant.setDescription(plant.getDescription());
-            return new ResponseEntity<>(plantRepository.save(_plant), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @PutMapping("/plants")
+    public Plant updatePlant(@RequestBody Plant updatedPlant) {
+        Plant retrievedPlant = plantRepository.findPlantByPlantNumber(updatedPlant.getPlantNumber());
+
+        retrievedPlant.setName(updatedPlant.getName());
+        retrievedPlant.setDescription(updatedPlant.getDescription());
+        retrievedPlant.setGardenCenterId(updatedPlant.getGardenCenterId());
+
+        plantRepository.save(retrievedPlant);
+        return retrievedPlant;
     }
 
-    //delete
+
+    // Delete
+    //    @DeleteMapping("/plants/{plantNumber}")
+    //    public ResponseEntity deleteReview(@PathVariable("plantNumber") String plantNumber ){
+    //        Plant plant = plantRepository.findPlantByPlantNumber(plantNumber);
+    //        if(plant!=null){
+    //            plantRepository.delete(plant);
+    //            return ResponseEntity.ok().build();
+    //        }else{
+    //            return ResponseEntity.notFound().build();
+    //        }
+    //    }
     @DeleteMapping("/plants/{plantNumber}")
-    public ResponseEntity deleteReview(@PathVariable("plantNumber") int plantNumber ){
-        Plant plant = plantRepository.findByPlantNumber(plantNumber);
-        if(plant!=null){
+    public ResponseEntity deleteReview(@PathVariable String plantNumber) {
+        Plant plant = plantRepository.findPlantByPlantNumber(plantNumber);
+        if (plant != null) {
             plantRepository.delete(plant);
             return ResponseEntity.ok().build();
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

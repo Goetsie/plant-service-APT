@@ -11,6 +11,5 @@ import java.util.Optional;
 public interface PlantRepository extends MongoRepository<Plant, String> {
     Plant findPlantByName(String name);
     List<Plant> findPlantByDescriptionContaining(String description);
-    Plant findByPlantNumber(int plantNumber);
-    Plant getByPlantNumber(int plantNumber);
+    Plant findPlantByPlantNumber(String plantNumber);
 }
