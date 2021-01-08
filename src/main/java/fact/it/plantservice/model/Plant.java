@@ -15,7 +15,6 @@ public class Plant {
     public Plant() {
     }
 
-    // Change when center is needed !!!!
     public Plant(int gardenCenterId, String plantNumber, String name, String description) {
         this.gardenCenterId = gardenCenterId;
         this.plantNumber = plantNumber;
