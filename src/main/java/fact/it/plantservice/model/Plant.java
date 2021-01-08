@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Plant {
     @Id
     private String id;
+    private String plantNumber;
     private String name;
     private String description;
     private int gardenCenterId;
@@ -15,12 +16,12 @@ public class Plant {
     }
 
     // Change when center is needed !!!!
-    public Plant(int gardenCenterId, String name, String description) {
+    public Plant(int gardenCenterId, String plantNumber, String name, String description) {
         this.gardenCenterId = gardenCenterId;
+        this.plantNumber = plantNumber;
         this.name = name;
         this.description = description;
     }
-
 
     public String getId() {
         return id;
@@ -30,12 +31,12 @@ public class Plant {
         this.id = id;
     }
 
-    public int getGardenCenterId() {
-        return gardenCenterId;
+    public String getPlantNumber() {
+        return plantNumber;
     }
 
-    public void setGardenCenterId(int gardenCenterId) {
-        this.gardenCenterId = gardenCenterId;
+    public void setPlantNumber(String plantNumber) {
+        this.plantNumber = plantNumber;
     }
 
     public String getName() {
@@ -52,5 +53,13 @@ public class Plant {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getGardenCenterId() {
+        return gardenCenterId;
+    }
+
+    public void setGardenCenterId(int gardenCenterId) {
+        this.gardenCenterId = gardenCenterId;
     }
 }

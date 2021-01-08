@@ -3,12 +3,13 @@ package fact.it.plantservice.controller;
 import fact.it.plantservice.model.Plant;
 import fact.it.plantservice.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PlantController {
@@ -18,6 +19,7 @@ public class PlantController {
 
     @PostConstruct
     public void fillDB() {
+        plantRepository.deleteAll();
         // If the repository is empty create new plants, otherwise manny duplicated plants
 //        if (plantRepository.count() == 0) {
 //            // Plant information from: https://www.buitenlevengevoel.nl/meest-populaire-tuinplanten-van-nederland/
@@ -52,5 +54,42 @@ public class PlantController {
         return plantRepository.findPlantByDescriptionContaining(description);
     }
 
+
+    //create
+    @PostMapping("/plants")
+    public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
+        try {
+            Plant _plant = plantRepository.save(plant);
+            return new ResponseEntity<>(_plant, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //update
+    @PutMapping("/plants/{plantNumber}")
+        public ResponseEntity<Plant> updatePlant(@PathVariable("plantNumber") int id, @RequestBody Plant plant) {
+        Plant _plant = plantRepository.findByPlantNumber(id);
+
+        if (_plant!=null) {
+            _plant.setName(plant.getName());
+            _plant.setDescription(plant.getDescription());
+            return new ResponseEntity<>(plantRepository.save(_plant), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //delete
+    @DeleteMapping("/plants/{plantNumber}")
+    public ResponseEntity deleteReview(@PathVariable("plantNumber") int plantNumber ){
+        Plant plant = plantRepository.findByPlantNumber(plantNumber);
+        if(plant!=null){
+            plantRepository.delete(plant);
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
