@@ -20,6 +20,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    #    Compile has to be succesful
     needs: compile
     name: Java 8 build, deliver artifact and container
     steps:
@@ -38,9 +39,10 @@ jobs:
       - name: Test and build project
         run: mvn -f pom.xml clean install
 
+      # Just for debugging reasons
       - name: Show contents of the current working directory
         run: ls -la
-
+      # Just for debugging reasons
       - name: Show contents of the target directory
         run: ls -la target
 

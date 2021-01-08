@@ -9,14 +9,14 @@ public class Plant {
     private String id;
     private String name;
     private String description;
-    // Tuincentra? !!!!
-
+    private int gardenCenterId;
 
     public Plant() {
     }
 
     // Change when center is needed !!!!
-    public Plant(String name, String description) {
+    public Plant(int gardenCenterId, String name, String description) {
+        this.gardenCenterId = gardenCenterId;
         this.name = name;
         this.description = description;
     }
@@ -28,6 +28,14 @@ public class Plant {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getGardenCenterId() {
+        return gardenCenterId;
+    }
+
+    public void setGardenCenterId(int gardenCenterId) {
+        this.gardenCenterId = gardenCenterId;
     }
 
     public String getName() {
