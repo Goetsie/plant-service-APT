@@ -100,7 +100,7 @@ public class PlantControllerUnitTests {
 
         given(plantRepository.findPlantByGardenCenterId(3)).willReturn(plantList);
 
-        mockMvc.perform(get("plants/gardencenterid/{gardenCenterId}", 3))
+        mockMvc.perform(get("/plants/gardencenterid/{gardenCenterId}", 3))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -115,7 +115,7 @@ public class PlantControllerUnitTests {
     }
 
     @Test
-    public void givenPlant_whenPlants_ThenReturnAllJsonPlants() throws Exception {
+    public void givenPlant_whenAllPlants_ThenReturnAllJsonPlants() throws Exception {
         Plant plantCenter1Plant1 = new Plant(1, "P0100", "Kerstroos", "De Helleborus niger staat beter bekend als de kerstroos. Deze tuinplant dankt die bijnaam onder andere aan zijn bijzondere bloeiperiode. Wanneer de rest van de tuin in diepe winterrust is, bloeit de kerstroos namelijk helemaal op. Volgens een oude legende zou de eerste kerstroos in Bethlehem zijn ontsproten uit de tranen van een arme herder die geen geschenk had voor het kindje Jezus. Op die manier kon hij de bloemen geven.");
         Plant plantCenter3Plant2 = new Plant(3, "P0103", "Klimop", "Ondanks dat sommigen hem liever kwijt zijn dan rijk, is de klimop in Nederland een erg populaire plant. Waarschijnlijk heeft de plant deze status te danken aan het feit dat het een makkelijke plant is die het overal goed doet. Ook blijft de Hedera het hele jaar door groen en is het een geschikte plant om het gevoel van een verticale tuin mee te creëren.");
         Plant plantCenter3Plant3 = new Plant(3, "P0104", "Hartlelie", "Door zijn vele soorten is er wat de hartlelie betreft voor iedereen wel een passende variant te vinden. De Hosta is bijvoorbeeld te krijgen met goudgele, witte, roomwit omrande, groene of blauwe (zweem) bladeren.");

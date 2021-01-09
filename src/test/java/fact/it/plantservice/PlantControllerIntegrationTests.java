@@ -121,8 +121,8 @@ public class PlantControllerIntegrationTests {
     }
 
     @Test
-    public void givenPlant_whenGetPlantByGardeCenterId_ThenReturnJsonPlants() throws Exception {
-        mockMvc.perform(get("plants/gardencenterid/{gardenCenterId}", 3))
+    public void givenPlant_whenGetPlantByGardenCenterId_ThenReturnJsonPlants() throws Exception {
+        mockMvc.perform(get("/plants/gardencenterid/{gardenCenterId}", 3))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
