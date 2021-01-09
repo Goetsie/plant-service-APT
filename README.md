@@ -1,4 +1,4 @@
-# Plant microservice
+#Plant microservice
 
 ```
 - /plants                                 GET
@@ -11,7 +11,7 @@
 - /plants/description/{description}       GET
 ```
 
-### Code coverage:  
+###Code coverage:  
 [![Coverage Status](https://coveralls.io/repos/github/badges/shields/badge.svg?branch=master)](https://coveralls.io/github/badges/shields?branch=main)
 
 #####Unit tests:
