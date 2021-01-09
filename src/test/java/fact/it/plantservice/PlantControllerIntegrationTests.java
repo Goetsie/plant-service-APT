@@ -121,6 +121,22 @@ public class PlantControllerIntegrationTests {
     }
 
     @Test
+    public void givenPlant_whenGetPlantByGardeCenterId_ThenReturnJsonPlants() throws Exception {
+        mockMvc.perform(get("plants/gardencenterid/{gardenCenterId}", 3))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].gardenCenterId", is(3)))
+                .andExpect(jsonPath("$[0].plantNumber", is("P0103")))
+                .andExpect(jsonPath("$[0].name", is("Klimop")))
+                .andExpect(jsonPath("$[0].description", is("Ondanks dat sommigen hem liever kwijt zijn dan rijk, is de klimop in Nederland een erg populaire plant. Waarschijnlijk heeft de plant deze status te danken aan het feit dat het een makkelijke plant is die het overal goed doet. Ook blijft de Hedera het hele jaar door groen en is het een geschikte plant om het gevoel van een verticale tuin mee te creëren.")))
+                .andExpect(jsonPath("$[1].gardenCenterId", is(3)))
+                .andExpect(jsonPath("$[1].plantNumber", is("P0104")))
+                .andExpect(jsonPath("$[1].name", is("Hartlelie")))
+                .andExpect(jsonPath("$[1].description", is("Door zijn vele soorten is er wat de hartlelie betreft voor iedereen wel een passende variant te vinden. De Hosta is bijvoorbeeld te krijgen met goudgele, witte, roomwit omrande, groene of blauwe (zweem) bladeren.")));
+    }
+
+    @Test
     public void givenPlant_whenPlants_ThenReturnAllJsonPlants() throws Exception {
         mockMvc.perform(get("/plants"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

@@ -59,6 +59,10 @@ public class PlantController {
         return plantRepository.findPlantByPlantNumber(plantNumber);
     }
 
+    @GetMapping("/plants/gardencenterid/{gardenCenterId}")
+    public List<Plant> getPlantByDescriptionContaining(@PathVariable Integer gardenCenterId) {
+        return plantRepository.findPlantByGardenCenterId(gardenCenterId);
+    }
 
     // Create
     //    @PostMapping("/plants")
