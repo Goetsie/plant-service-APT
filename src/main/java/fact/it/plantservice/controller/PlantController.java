@@ -23,7 +23,6 @@ public class PlantController {
         // If the repository is empty create new plants, otherwise manny duplicated plants
         if (plantRepository.count() == 0) {
             // Plant information from: https://www.buitenlevengevoel.nl/meest-populaire-tuinplanten-van-nederland/
-
             plantRepository.save(new Plant(1, "P0100", "Kerstroos", "De Helleborus niger staat beter bekend als de kerstroos. Deze tuinplant dankt die bijnaam onder andere aan zijn bijzondere bloeiperiode. Wanneer de rest van de tuin in diepe winterrust is, bloeit de kerstroos namelijk helemaal op. Volgens een oude legende zou de eerste kerstroos in Bethlehem zijn ontsproten uit de tranen van een arme herder die geen geschenk had voor het kindje Jezus. Op die manier kon hij de bloemen geven."));
             plantRepository.save(new Plant(1, "P0101", "Hortensia", "Het zal je waarschijnlijk niet verbazen de hortensia in de lijst tegen te komen. Deze plant kom je in veel Nederlandse voor- en achtertuinen tegen. De hortensia kent veel verschillende soorten, maar de populairste is toch wel de Hydrangea macrophylla."));
             plantRepository.save(new Plant(2, "P0102", "Buxus", "De buxus is zo'n fijne plant, omdat je deze in werkelijk alle vormen kunt snoeien waarin je maar wilt. Hierdoor zijn ze in iedere tuin precies naar de wensen van de eigenaar te gebruiken."));
